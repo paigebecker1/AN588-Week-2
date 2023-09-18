@@ -100,6 +100,7 @@ This presumably would give us this whole slice.
 ###### Checking work  
 ```{r}
 a[1:5, 1:5, 3, 3] 
+# great job on these previous two challenges. really concise code
 ```
 
 Yay!  
@@ -127,9 +128,10 @@ Primates <- list(Haplorhini,Strepsirhini)
 names(Primates) <- list("Haplorhini", "Strepsirhini")
 Primates
 
-
+# great job! I did this the exact same way. I think it would be beneficial to explain a in a little more detail which each line of code does for future references. 
 ```
 Okay, I think I did this successfully, but it's not very pretty. I'd love to learn how to make it look prettier.  
+ugh i want mine to look prettier so bad - sofia 
 
 # Practicing with Data Frames  
 ### Not a challenge, but I thought I'd include it
