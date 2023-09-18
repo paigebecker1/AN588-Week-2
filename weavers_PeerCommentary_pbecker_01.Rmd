@@ -100,7 +100,7 @@ This presumably would give us this whole slice.
 ###### Checking work  
 ```{r}
 a[1:5, 1:5, 3, 3] 
-# great job on these previous two challenges. really concise code
+# great job on these previous two challenges. really concise code and really easy to follow bite sized chunks. 
 ```
 
 Yay!  
@@ -188,5 +188,7 @@ This seemed to work. I did [Google](https://technicaljockey.com/r-programming-tr
 ```{r}
 df_m3$X3 <- as.factor(df_m3$X3)
 str(df_m3)
+# we did this the same way I think! great job. I think this challenge was pretty straightforward. 
 ```
 
+Great code, Paige. It was easy to follow and I really enjoyed reading your comments and think it's really useful to reflect on coding while you're doing it. I think I will probably implement this in my future challenges and homework assignments. 
