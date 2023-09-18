@@ -1,0 +1,190 @@
+---
+title: "Prettified Module 4 Challenges"
+author: "Paige Becker"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: cerulean
+    toc: yes
+    toc_float:
+      collapsed: true
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Challenge 1
+
+### Creating a vector of 1 word character strings comprised of the first line of *Ulysses* by James Joyce
+
+```{r}
+u <- c("stately", "plump", "Buck" ,"Mulligan", "came", "from" ,"the", "stairhead", "bearing", "a", "bowl", "of", "lather", "on", "which", "a", "mirror", "and", "a", "razor", "lay", "crossed")
+u
+```
+
+#### Extracting every third element of my vector
+
+```{r}
+extracted_u <- u[seq(from= 3, to =22, by =3)]
+extracted_u
+```
+I struggled using str_split(). I messed around with it for about 2 hours before I decided to just use seq(). I will ask my peers about it on Thursday. (However, after further inspection, I realized str_split() would be used to split the original vector into several elements instead of extracting elements, but I typed all the words in before realizing that...)
+<!-- JD: I think it's interesting how you chose to start the sequence from=3, the actual third word, rather than 0. There are many different ways to approach this challenge! Nice work! -->
+
+# Challenge 2  
+### Creating an example matrix
+```{r}
+m <- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
+m
+
+```
+
+#### Extracting row 2,3,and 6
+```{r}
+x <- m[c(2,3,6),]
+x
+```
+[TutorialKart](https://www.tutorialkart.com/r-tutorial/r-get-multiple-rows-of-matrix/#gsc.tab=0) helped me figure out how to extract *multiple* rows from a matrix.  
+**matrixname[row,column]**  
+
+#### Extracting rows 6-8
+```{r}
+x <- m[c(6:8),]
+x
+```
+#### Extracting elements from row 2, column 2 to row 6, column 9
+```{r}
+x <- m[2:6,2:9]
+x
+```
+I am finding that using : is getting more and more intuitive. When you want every element in between 2 locations you can use : in several different functions. 
+<!-- JD: Great job on Challenge 2! You set up your functions for extracting rows/columns differently than I did, and it seems so much easier. This taught me something new - thanks! :) -->
+# Challenge 3
+
+### Construct a 4-dimensional, 400 element array (5 x 5 x 4 x 4) named a consisting of the numbers 400 to 1
+```{r}
+a <- array(data = 400:1, dim = c(5, 5, 4, 4))
+a
+```
+
+Given this matrix, what would the following return?  
+a[1, 1, 1, 2]  
+395  
+
+###### Checking work  
+```{r}
+a[1, 1, 1, 2]
+```
+Ok I was very wrong. I realized I mixed up the locations of the rows and columns. I assumed it was labelled [levels, row, column] but it's actually **[row, column, levels]**. (Albeit, the 4-D concept is a little confusing for me, but idk if that's a coding problem or a brain problem)  
+<!-- JD: The 4-D concept was confusing for me, too. I admire your dedication to checking your work by searching the actual matrix. Great catch, and now we know how the 4-d array is formatted. -->
+a[2, 3, 2, ]  
+364, 264, 164, 64  
+
+###### Checking work  
+```{r}
+a[2, 3, 2, ] 
+```
+Success! Although, I am looking at the actual matrix to find numbers instead of doing the math for it.   
+
+a[1:5, 1:5, 3, 3]  
+[,1] [,2] [,3] [,4] [,5]  
+[1,]  150  145  140  135  130  
+[2,]  149  144  139  134  129  
+[3,]  148  143  138  133  128  
+[4,]  147  142  137  132  127  
+[5,]  146  141  136  131  126  
+This presumably would give us this whole slice.  
+
+###### Checking work  
+```{r}
+a[1:5, 1:5, 3, 3] 
+```
+
+Yay!  
+
+# Challenge 4  
+### Create a list of primate taxonomy  
+```{r}
+#Setting Up Haplorhini
+Platyrrhini <- c("Cebidae", "Atelidae", "Pitheciidae")
+Catarrhini <- c("Cercopithecidae", "Hylobatidae", "Hominidae")
+Anthropoidea <- list(Platyrrhini, Catarrhini)
+names(Anthropoidea) <- list("Platyrrhini", "Catarrhini")
+Haplorhini <- list(Anthropoidea)
+names(Haplorhini) <- list("Anthropoidea")
+
+#Setting up Strepsirhini
+Lemuroidea <- c("Cheirogaleidae", "Lepilemuridae", "Indriidae", "Lemuridae",
+    "Daubentoniidae")
+Lorisoidea <- c("Lorisidae", "Galagidae")
+Strepsirhini <- list(Lemuroidea, Lorisoidea)
+names(Strepsirhini) <- list("Lemuroidea", "Lorisoidea")
+
+#Combining both
+Primates <- list(Haplorhini,Strepsirhini)
+names(Primates) <- list("Haplorhini", "Strepsirhini")
+Primates
+
+
+```
+Okay, I think I did this successfully, but it's not very pretty. I'd love to learn how to make it look prettier.  
+<!-- JD: Great job here. This was definitely challenging with all the nesting. Just 1 thing - for this primate taxonomy list, you are missing Tarsioidea which is a subgroup of Haplorhini.   -->
+# Practicing with Data Frames  
+### Not a challenge, but I thought I'd include it
+### Load in data
+```{r}
+df <- read.csv("C:/Users/pbeck/Desktop/Boston University/Fall 2023/BI 588/AN588-Week-2/random_people", sep = ",", header = TRUE, stringsAsFactors = FALSE) #load data in
+#Print select columns
+df[, c(1, 3, 4, 11, 12)]
+```
+### Add additional rows
+```{r}
+
+df <- cbind(df, id = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+    17, 18, 19, 20))
+df <- cbind(df, school = c("BU", "BU", "Harvard", "Harvard", "BU", "Boston College",
+    "MIT", "BU", "BU", "UMASS Boston", "Harvard", "BU", "Boston College", "BU",
+    "Harvard", "MIT", "Harvard", "BU", "UMASS Boston", "Harvard"))
+df
+```
+### Filtering to get specific subsets of data  
+This is getting every student who's school is BU
+```{r}
+
+
+new_df <- df[df$school == "BU", ]
+new_df
+```
+Or if we only want the names of people who's school is BU:
+```{r}
+new_df <- df[df$school == "BU", c("name.last", "name.first", "school")]
+new_df
+```
+
+# Challenge 5  
+### Create 5x3 matrix called m3  
+```{r}
+m3 <- matrix(data = c(3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2), nrow = 5, ncol = 3, byrow = TRUE)
+m3
+```
+### Coerce the matrix to a data frame  
+```{r}
+df_m3 <- data.frame(m3)
+df_m3
+```
+### Coerce the second column to be *logical-valued*   
+```{r}
+df_m3$X2 <- as.logical(df_m3$X2)
+str(df_m3)
+```
+This seemed to work. I did [Google](https://technicaljockey.com/r-programming-training/coercion-in-r/) the as.logical() function. Who knew there's a bunch! as.integer(), as.character(), as.factor(), as.numeric etc.   
+
+
+### Coerce the third column to be *factor-valued*  
+```{r}
+df_m3$X3 <- as.factor(df_m3$X3)
+str(df_m3)
+```
+<!-- JD: Paige, you did a really great job on this! I admire your thorough work, and it is clear that you really want to understand the concepts and functions. Don't forget to add Tarsioidea to your primate taxonomy tree! P.S. thanks for the tip on leaving comments :) -->
